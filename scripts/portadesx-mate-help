@@ -28,4 +28,4 @@ echo "For updating your system (Not related to upgrading to next release), use '
 echo "press y and enter to confirm update, or press n and enter to abort"
 echo "Don't worry, this update doesn't need reboot, run automatically without notice, or forcefully reboot and making you lose your works or progress ;)"
 echo 
-echo "For further information, intructions for upgrading to next release, or just more detailed how-tos, please visit our repository at https://github.com/arfshl/portadesx/"
+echo "For further information, intructions for upgrading to next release, or just more detailed how-tos, please visit our repository at https://github.com/arfshl/portadesx-mate"
