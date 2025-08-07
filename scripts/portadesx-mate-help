@@ -5,7 +5,7 @@ echo
 echo "Default username is 'portadesx'"
 echo "Default 'sudo' password is '123'"
 echo
-echo "Default VNC server address is 127.0.0.1:3"
+echo "Default VNC server address is 127.0.0.1:5"
 echo "Default VNC password is 1234567890"
 echo
 echo "Use 'portadesx-mate-help' command to view this help page."
