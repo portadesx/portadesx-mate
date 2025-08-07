@@ -1,0 +1,31 @@
+#!/bin/sh
+
+echo "PortadesX:MATE is a 'Flavor' of PortadesX, a Termux proot-distro rootfs with pre-installed desktop environment and with internet and multimedia apps based on Ubuntu LTS. Now featuring MATE Desktop"
+echo
+echo "Default username is 'portadesx'"
+echo "Default 'sudo' password is '123'"
+echo
+echo "Default VNC server address is 127.0.0.1:3"
+echo "Default VNC password is 1234567890"
+echo
+echo "Use 'portadesx-mate-help' command to view this help page."
+echo
+echo "To use Command-Line session, use 'portadesx-mate-cli' commands, and use 'exit' commands for log-out from proot shell and back to termux shell"
+echo "To use Graphical session with Termux:X11, use 'portadesx-mate-gui' commands and press 'Ctrl+C' for stopping GUI"
+echo
+echo "To use Graphical session with VNC:"
+echo "First, Enter Command-Line session, with 'portadesx-mate-gui' commands"
+echo "Then, within proot shell, use 'startvnc' commands to start VNC server, 'stopvnc' for stopping it, 'restartvnc' for restart it."
+echo "On RealVNC, add new connection, give it a name and enter default VNC server address"
+echo "Start it and enter default password"
+echo "Use 'exit' commands if you wish to log-out from proot shell and back to termux shell, remember that this will stopping VNC server."
+echo
+echo "To use offline office document editing, install this extension from chromium browser"
+echo "https://chromewebstore.google.com/detail/office-editing-for-docs-s/gbkeegbaiigmenfmjfclcdgdpimamgkj"
+echo "Once installed,you just need to drag-and-drop documents from file manager to chromium browser window to edit it offline."
+echo
+echo "For updating your system (Not related to upgrading to next release), use 'sudo apt update && sudo apt upgrade' commands"
+echo "press y and enter to confirm update, or press n and enter to abort"
+echo "Don't worry, this update doesn't need reboot, run automatically without notice, or forcefully reboot and making you lose your works or progress ;)"
+echo 
+echo "For further information, intructions for upgrading to next release, or just more detailed how-tos, please visit our repository at https://github.com/arfshl/portadesx/"
