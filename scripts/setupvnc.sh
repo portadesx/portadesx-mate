@@ -12,7 +12,7 @@ echo '#!/bin/sh
 xrdb $HOME/.Xresources
 export PULSE_SERVER=127.0.0.1
 export DISPLAY=:5
-startlxqt' >> /home/portadesx/.vnc/xstartup
+mate-session' >> /home/portadesx/.vnc/xstartup
 
 # Create script for starting VNC server
 echo '#!/bin/sh
