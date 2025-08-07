@@ -32,7 +32,7 @@ jobs:
     - name: Remove snap override on apt
       run: |
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "apt update && apt install wget sudo && wget https://raw.githubusercontent.com/arfshl/no-snap-on-apt/refs/heads/main/Noble/arm64/setup.sh && sh setup.sh && rm setup.sh"
-    - name: Install XFCE desktop, VNC, and basic utility
+    - name: Install MATE desktop, VNC, and basic utility
       run: |
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "apt update && apt upgrade -y && apt install mate-desktop-environment-core caja mate-terminal dbus-x11 pulseaudio nano wget curl sudo adduser tigervnc-standalone-server -y && apt clean"
     - name: Adding user and password
