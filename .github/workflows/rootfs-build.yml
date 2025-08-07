@@ -46,7 +46,7 @@ jobs:
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "wget https://raw.githubusercontent.com/arfshl/portadesx-mate/refs/heads/main/scripts/portadesx-mate-help -P /usr/local/bin && chmod +x /usr/local/bin/portadesx-mate-help && portadesx-mate-help"
     - name: Install user apps
       run: | 
-        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "apt update && apt install chromium firefox vlc thunderbird egrampa atril eom mate-calc pluma libheif1 webp-pixbuf-loader fonts-liberation p7zip -y"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "apt update && apt install chromium firefox vlc thunderbird engrampa atril eom mate-calc pluma libheif1 webp-pixbuf-loader fonts-liberation p7zip -y"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "mkdir -p /home/portadesx/Desktop"
         # sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "mkdir -p /home/portadesx/.config/ && wget https://raw.githubusercontent.com/arfshl/portadesx/refs/heads/main/scripts/user-dirs.dirs -P /home/portadesx/.config/"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "sudo sed -i 's|chromium --incognito %U|chromium --incognito --no-sandbox %U|' /usr/share/applications/chromium.desktop"
@@ -62,7 +62,7 @@ jobs:
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "ln -s /usr/share/applications/atril.desktop /home/portadesx/Desktop/atril.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "ln -s /usr/share/applications/mate-calc.desktop /home/portadesx/Desktop/mate-calc.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "ln -s /usr/share/applications/eom.desktop /home/portadesx/Desktop/eom.desktop"
-        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "ln -s /usr/share/applications/egrampa.desktop /home/portadesx/Desktop/egrampa.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "ln -s /usr/share/applications/engrampa.desktop /home/portadesx/Desktop/engrampa.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "ln -s /usr/share/applications/pluma.desktop /home/portadesx/Desktop/pluma.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "ln -s /usr/share/applications/mate-terminal.desktop /home/portadesx/Desktop/mate-terminal.desktop"
     - name: Unmount important filesystem
