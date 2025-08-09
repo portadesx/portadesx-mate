@@ -34,26 +34,26 @@ jobs:
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "apt update && apt install wget sudo && wget https://raw.githubusercontent.com/arfshl/no-snap-on-apt/refs/heads/main/Noble/arm64/setup.sh && sh setup.sh && rm setup.sh"
     - name: Install MATE desktop and its applets, VNC, and basic utility
       run: |
-        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "apt update && apt upgrade -y && apt install mate-desktop-environment-core caja mate-terminal mate-applet-brisk-menu mate-backgrounds mate-dock-applet mate-indicator-applet mate-indicator-applet-common mate-tweak mate-applets dbus-x11 pulseaudio nano wget curl sudo adduser tigervnc-standalone-server -y && apt clean"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "apt update && apt upgrade -y && apt install mate-desktop-environment-core caja mate-menus mate-terminal mate-applet-brisk-menu mate-backgrounds mate-dock-applet mate-indicator-applet mate-menus pavucontrol mate-indicator-applet-common mate-tweak mate-applets dbus-x11 pulseaudio nano wget curl sudo adduser tigervnc-standalone-server -y && apt clean"
     - name: Adding user and password
       run: |
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "sudo adduser --disabled-password --gecos "portadesx" portadesx && echo 'portadesx:123' | chpasswd && echo 'portadesx ALL=(ALL:ALL) ALL' >> /etc/sudoers.d/user"
     - name: Setting up VNC Script
       run: | 
-        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "wget https://raw.githubusercontent.com/arfshl/portadesx-mate/refs/heads/main/scripts/vncsetup.sh && sh vncsetup.sh && rm vncsetup.sh"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "wget https://raw.githubusercontent.com/portadesx/portadesx-mate/refs/heads/main/scripts/vncsetup.sh && sh vncsetup.sh && rm vncsetup.sh"
     - name: Setting up Help Script
       run: | 
-        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "wget https://raw.githubusercontent.com/arfshl/portadesx-mate/refs/heads/main/scripts/portadesx-mate-help -P /usr/local/bin && chmod +x /usr/local/bin/portadesx-mate-help && portadesx-mate-help"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "wget https://raw.githubusercontent.com/portadesx/portadesx-mate/refs/heads/main/scripts/portadesx-mate-help -P /usr/local/bin && chmod +x /usr/local/bin/portadesx-mate-help && portadesx-mate-help"
     - name: Install user apps
       run: | 
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "apt update && apt install chromium firefox vlc thunderbird engrampa atril eom mate-calc pluma libheif1 webp-pixbuf-loader fonts-liberation p7zip -y"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "mkdir -p /home/portadesx/Desktop"
-        # sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "mkdir -p /home/portadesx/.config/ && wget https://raw.githubusercontent.com/arfshl/portadesx/refs/heads/main/scripts/user-dirs.dirs -P /home/portadesx/.config/"
+        # sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "mkdir -p /home/portadesx/.config/ && wget https://raw.githubusercontent.com/portadesx/portadesx/refs/heads/main/scripts/user-dirs.dirs -P /home/portadesx/.config/"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "sudo sed -i 's|chromium --incognito %U|chromium --incognito --no-sandbox %U|' /usr/share/applications/chromium.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "sudo sed -i 's|chromium %U|chromium --no-sandbox %U|' /usr/share/applications/chromium.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "sudo sed -i 's|chromium --new-window %U|chromium --new-window --no-sandbox %U|' /usr/share/applications/chromium.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "sudo rm /etc/chromium/master_preferences"
-        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "wget https://raw.githubusercontent.com/arfshl/portadesx/refs/heads/main/scripts/office-online.desktop -P /usr/share/applications/"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "wget https://raw.githubusercontent.com/portadesx/portadesx/refs/heads/main/scripts/office-online.desktop -P /usr/share/applications/"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "ln -s /usr/share/applications/office-online.desktop /home/portadesx/Desktop/office-online.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "ln -s /usr/share/applications/firefox.desktop /home/portadesx/Desktop/firefox.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate-2404 /bin/bash -c "ln -s /usr/share/applications/chromium.desktop /home/portadesx/Desktop/chromium.desktop"
