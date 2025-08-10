@@ -1,6 +1,7 @@
 # Table of Contents
 - [List of portadesx commands](https://github.com/portadesx/portadesx-mate/blob/main/docs/README.md#list-of-portadesx-commands)
 - [Default users password and vnc credentials](https://github.com/portadesx/portadesx-mate/blob/main/docs/README.md#default-users-password-and-vnc-credentials)
+- [Difference between Termux:X11 and VNC Session](https://github.com/portadesx/portadesx-mate/blob/main/docs/README.md#Difference-between-Termux:X11-and-VNC-Session)
 - [Update existing installation](https://github.com/portadesx/portadesx-mate/blob/main/docs/README.md#update-existing-installation)
 - [Upgrade to newer ubuntu release](https://github.com/portadesx/portadesx-mate/blob/main/docs/README.md#upgrade-to-newer-ubuntu-release)
 - [Office Software](https://github.com/portadesx/portadesx-mate/blob/main/docs/README.md#office-software)
@@ -21,6 +22,9 @@
 - Default `sudo` password is `123`
 - Default VNC server address is `127.0.0.1:5`
 - Default VNC password is `1234567890`
+
+### Difference between Termux:X11 and VNC Session
+X11 session excells speed so you can expect no lagging on gestures or video playback, but this can't be zoomed so this is make smaller screen not too comfortable. Meanwhile VNC graphics is a bit lagging meanwhile doing a gesture or playing a video but VNC can be zoomed and give convenience for smaller screen user but with sacrificing performance
 
 ### Update existing installation 
 Usually that's always can be done with `sudo apt update && sudo apt upgrade -y` but stay keep tracks on release note, who knows that we can be including our own feature ontop of that
