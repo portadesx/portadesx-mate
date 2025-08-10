@@ -4,7 +4,7 @@ PortadesX:MATE is a 'Flavor' of PortadesX, a Termux proot-distro rootfs with pre
 
 ### Core Features:
 
-- Pre-installed MATE Desktop 
+- Pre-installed [MATE](https://mate-desktop.org) Desktop 
 - Pre-configured Sound, User, and VNC Server with easy command
 - Pre-installed Apps
 - Pre-configured access to android files
