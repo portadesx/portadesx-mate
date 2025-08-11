@@ -18,7 +18,7 @@ PortadesX:MATE is a 'Flavor' of PortadesX, a Termux proot-distro rootfs with pre
 - [Atril PDF Viewer](https://wiki.mate-desktop.org/mate-desktop/applications/atril/)
 - [Eye of MATE Image Viewer](https://wiki.mate-desktop.org/mate-desktop/applications/eom/)
 - [Pluma Text Editor](https://wiki.mate-desktop.org/mate-desktop/applications/pluma/)
-- [Engarmpa File Archiver](https://wiki.mate-desktop.org/mate-desktop/applications/engrampa/)
+- [Engrampa File Archiver](https://wiki.mate-desktop.org/mate-desktop/applications/engrampa/)
 - [MATE Calculator](https://wiki.mate-desktop.org/mate-desktop/applications/mate-calc/)
 - Chromium shortcut to Microsoft Office Online, see [docs](https://github.com/portadesx/portadesx/blob/main/docs%2FREADME.md) for offline alternative
 
