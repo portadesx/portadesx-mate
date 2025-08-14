@@ -9,7 +9,7 @@ permissions:
 
 jobs:
 
-  rootfs-build:
+  build:
   
     runs-on: ubuntu-24.04-arm
 
