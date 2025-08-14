@@ -1,0 +1,97 @@
+name: noble-aarch64
+
+on:
+  workflow_dispatch:
+  
+
+permissions:
+  contents: write
+
+jobs:
+
+  rootfs-build:
+  
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Download rootfs
+      run: |
+        wget -q https://github.com/termux/proot-distro/releases/download/v4.18.0/ubuntu-noble-aarch64-pd-v4.18.0.tar.xz -P $GITHUB_WORKSPACE/
+    - name: Decompress rootfs
+      run: |
+        sudo tar -xJf ubuntu-noble-aarch64-pd-v4.18.0.tar.xz
+        mv ubuntu-noble-aarch64 portadesx-mate
+    - name: Mount important filesystem
+      run: |
+        sudo mount --bind /proc $GITHUB_WORKSPACE/portadesx-mate/proc
+        sudo mount --bind /sys $GITHUB_WORKSPACE/portadesx-mate/sys
+        sudo mount --bind /run $GITHUB_WORKSPACE/portadesx-mate/run
+        sudo mount --bind /dev $GITHUB_WORKSPACE/portadesx-mate/dev
+        sudo mount --bind /dev/pts $GITHUB_WORKSPACE/portadesx-mate/dev/pts
+    - name: Remove snap override on apt
+      run: |
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "apt update && apt install wget sudo && wget https://raw.githubusercontent.com/arfshl/no-snap-on-apt/refs/heads/main/Noble/arm64/setup.sh && sh setup.sh && rm setup.sh"
+    - name: Install MATE desktop and its applets, VNC, and basic utility
+      run: |
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "apt update && apt upgrade -y && apt install mate-desktop-environment-core caja mate-menus mate-terminal mate-applet-brisk-menu mate-backgrounds mate-dock-applet mate-indicator-applet mate-menus pavucontrol mate-indicator-applet-common mate-tweak mate-applets dbus-x11 pulseaudio nano wget curl sudo adduser tigervnc-standalone-server -y && apt clean"
+    - name: Adding user and password
+      run: |
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "sudo adduser --disabled-password --gecos "portadesx" portadesx && echo 'portadesx:123' | chpasswd && echo 'portadesx ALL=(ALL:ALL) ALL' >> /etc/sudoers.d/user"
+    - name: Setting up VNC Script
+      run: | 
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "wget https://raw.githubusercontent.com/portadesx/portadesx-mate/refs/heads/main/scripts/vncsetup.sh && sh vncsetup.sh && rm vncsetup.sh"
+    - name: Setting up Help Script
+      run: | 
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "wget https://raw.githubusercontent.com/portadesx/portadesx-mate/refs/heads/main/scripts/portadesx-mate-help -P /usr/local/bin && chmod +x /usr/local/bin/portadesx-mate-help && portadesx-mate-help"
+    - name: Install user apps
+      run: | 
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "apt update && apt install chromium firefox vlc thunderbird engrampa atril eom mate-calc pluma libheif1 webp-pixbuf-loader fonts-liberation p7zip -y"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "mkdir -p /home/portadesx/Desktop"
+        # sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "mkdir -p /home/portadesx/.config/ && wget https://raw.githubusercontent.com/portadesx/portadesx/refs/heads/main/scripts/user-dirs.dirs -P /home/portadesx/.config/"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "sudo sed -i 's|chromium --incognito %U|chromium --incognito --no-sandbox %U|' /usr/share/applications/chromium.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "sudo sed -i 's|chromium %U|chromium --no-sandbox %U|' /usr/share/applications/chromium.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "sudo sed -i 's|chromium --new-window %U|chromium --new-window --no-sandbox %U|' /usr/share/applications/chromium.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "sudo rm /etc/chromium/master_preferences"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "wget https://raw.githubusercontent.com/portadesx/portadesx/refs/heads/main/scripts/office-online.desktop -P /usr/share/applications/"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/office-online.desktop /home/portadesx/Desktop/office-online.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/firefox.desktop /home/portadesx/Desktop/firefox.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/chromium.desktop /home/portadesx/Desktop/chromium.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/vlc.desktop /home/portadesx/Desktop/vlc.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/thunderbird.desktop /home/portadesx/Desktop/thunderbird.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/atril.desktop /home/portadesx/Desktop/atril.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/mate-calc.desktop /home/portadesx/Desktop/mate-calc.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/eom.desktop /home/portadesx/Desktop/eom.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/engrampa.desktop /home/portadesx/Desktop/engrampa.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/pluma.desktop /home/portadesx/Desktop/pluma.desktop"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/mate-terminal.desktop /home/portadesx/Desktop/mate-terminal.desktop"
+    - name: Unmount important filesystem
+      run: |
+        sudo umount -l $GITHUB_WORKSPACE/portadesx-mate/proc
+        sudo umount -l $GITHUB_WORKSPACE/portadesx-mate/sys
+        sudo umount -l $GITHUB_WORKSPACE/portadesx-mate/run
+        sudo umount -l $GITHUB_WORKSPACE/portadesx-mate/dev
+    - name: Compress rootfs
+      run: |
+        mkdir $GITHUB_WORKSPACE/release
+        cd $GITHUB_WORKSPACE
+        sudo tar -cJf $GITHUB_WORKSPACE/release/portadesx-mate.tar.xz portadesx-mate
+        echo "TIMESTAMP=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
+        echo "SHA256=$(sha256sum $GITHUB_WORKSPACE/release/portadesx-mate.tar.xz | cut -d ' ' -f 1)" >> $GITHUB_ENV
+    - name: Release it!
+      uses: softprops/action-gh-release@v2
+      with:
+          tag_name: noble-aarch64
+          name: 24.04 aarch64
+          body: |
+            SHA-256: `${{ env.SHA256 }}`
+          draft: false
+          prerelease: false
+          make_latest: true
+          files: release/portadesx-mate.tar.xz
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        
+        
+  
