@@ -27,11 +27,11 @@ PortadesX:MATE is a 'Flavor' of PortadesX, a Termux proot-distro rootfs with pre
 ![](https://github.com/portadesx/portadesx-screenshots/raw/main/24.04/mate/app1.jpg)
 ![](https://github.com/portadesx/portadesx-screenshots/raw/main/24.04/mate/vnc.jpg)
 
-### Minimum System Requirements
+### System Requirements
 - Android 8.0+ (Fixes for error code [Process completed (signal 9) - press Enter] for Android 12+ can be see [here](https://github.com/agnostic-apollo/Android-Docs/blob/master/en/docs/apps/processes/phantom-cached-and-empty-processes.md#internal-details-for-android-14-and-higher))
 - 64-bit ARM CPU
-- 4GB of RAM
-- 10GB of empty space
+- 4GB of RAM - 8GB Recommended
+- 5GB of empty space - 10GB Recommended
 
 ### Apps Needed
 - [Termux](https://github.com/termux/termux-app/releases/)
