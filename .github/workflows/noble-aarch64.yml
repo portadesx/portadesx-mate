@@ -46,7 +46,7 @@ jobs:
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "wget https://raw.githubusercontent.com/portadesx/portadesx-mate/refs/heads/main/scripts/portadesx-mate-help -P /usr/local/bin && chmod +x /usr/local/bin/portadesx-mate-help && portadesx-mate-help"
     - name: Install user apps
       run: | 
-        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "apt update && apt install chromium firefox vlc thunderbird engrampa atril eom mate-calc pluma libheif1 webp-pixbuf-loader fonts-liberation p7zip -y"
+        sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "apt update && apt install chromium firefox vlc thunderbird engrampa atril eom mate-calc pluma libheif1 webp-pixbuf-loader fonts-liberation p7zip -y && apt clean"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "mkdir -p /home/portadesx/Desktop"
         # sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "mkdir -p /home/portadesx/.config/ && wget https://raw.githubusercontent.com/portadesx/portadesx/refs/heads/main/scripts/user-dirs.dirs -P /home/portadesx/.config/"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "sudo sed -i 's|chromium --incognito %U|chromium --incognito --no-sandbox %U|' /usr/share/applications/chromium.desktop"
@@ -66,6 +66,7 @@ jobs:
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/pluma.desktop /home/portadesx/Desktop/pluma.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "ln -s /usr/share/applications/mate-terminal.desktop /home/portadesx/Desktop/mate-terminal.desktop"
         sudo chroot $GITHUB_WORKSPACE/portadesx-mate /bin/bash -c "chmod -R 775 /home/portadesx/Desktop/"
+        sudo chroot $GITHUB_WORKSPACE/portadesx /bin/bash -c "chmod +x /home/portadesx/Desktop/*.desktop"
     - name: Unmount important filesystem
       run: |
         sudo umount -l $GITHUB_WORKSPACE/portadesx-mate/proc
