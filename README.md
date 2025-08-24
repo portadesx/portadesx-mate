@@ -32,6 +32,8 @@ PortadesX:MATE is a 'Flavor' of PortadesX, a Termux proot-distro rootfs with pre
 - 64-bit ARM CPU
 - 4GB of RAM - 8GB Recommended
 - 5GB of empty space - 10GB Recommended
+- Stable internet connection for downloading rootfs
+
 
 ### Apps Needed
 - [Termux](https://github.com/termux/termux-app/releases/)
